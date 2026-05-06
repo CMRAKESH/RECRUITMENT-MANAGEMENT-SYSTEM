@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="/static/style.css">
+<div class="container">
+<h2>Saved Jobs</h2>
+
+{% for d in data %}
+<div class="job-card">
+<p>{{ d[0] }}</p>
+</div>
+{% endfor %}
+
+<a href="/">Back</a>
+</div>

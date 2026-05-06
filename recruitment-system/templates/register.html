@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<div class="container">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for c,m in messages %}<div class="alert {{c}}">{{m}}</div>{% endfor %}
+{% endwith %}
+
+<h2>Register</h2>
+<form method="post" enctype="multipart/form-data">
+<input name="username" placeholder="Username">
+<input name="password" placeholder="Password">
+
+<select name="role">
+<option value="candidate">Candidate</option>
+<option value="admin">Admin</option>
+</select>
+
+<input type="file" name="resume">
+<button>Register</button>
+</form>
+</div>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+
+    <style>
+        body { font-family: Arial; background: #f4f6ff; }
+        .container { width: 90%; margin: auto; }
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        .select { background: green; color: white; }
+        .reject { background: red; color: white; }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Admin Panel</h2>
+
+{% for app in applications %}
+<div class="card">
+
+    <h3>{{ app['name'] }}</h3>
+    <p>Email: {{ app['email'] }}</p>
+    <p>Job: {{ app['job'] }}</p>
+    <p>Skills: {{ app['skills'] }}</p>
+    <p>Status: {{ app['status'] }}</p>
+
+    {% if app['resume'] %}
+        <a href="/uploads/{{ app['resume'] }}" target="_blank">View Resume</a>
+    {% endif %}
+
+    <br><br>
+
+    <!-- FIXED FORM -->
+    <form action="/update_status/{{ app['_id'] }}" method="POST">
+
+        <button type="submit" name="status" value="selected" class="btn select">
+            Select
+        </button>
+
+        <button type="submit" name="status" value="rejected" class="btn reject">
+            Reject
+        </button>
+
+    </form>
+
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+
+<h2>My Applications</h2>
+
+{% for app in apps %}
+<div class="card">
+<p><b>Job:</b> {{app[0]}}</p>
+<p><b>Experience:</b> {{app[1]}}</p>
+<p><b>Skills:</b> {{app[2]}}</p>
+<p><b>Status:</b> {{app[3]}}</p>
+</div>
+{% endfor %}
+
+</div><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+<h2>My Applications</h2>
+
+{% for app in apps %}
+<div class="card">
+<p><b>Job:</b> {{app[0]}}</p>
+<p><b>Experience:</b> {{app[1]}}</p>
+<p><b>Skills:</b> {{app[2]}}</p>
+<p><b>Status:</b> {{app[3]}}</p>
+</div>
+{% endfor %}
+
+</div>

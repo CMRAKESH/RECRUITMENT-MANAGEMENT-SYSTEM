@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<div class="container">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for c,m in messages %}<div class="alert {{c}}">{{m}}</div>{% endfor %}
+{% endwith %}
+
+<h2>Login</h2>
+<form method="post">
+<input name="username" placeholder="Username">
+<input name="password" placeholder="Password">
+<button>Login</button>
+</form>
+
+<a href="/register">Register</a>
+</div>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Jobs</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6ff;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.search {
+    width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.btn {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.active {
+    background: #5a4bff;
+    color: white;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.tag {
+    background: #eef;
+    padding: 5px;
+    margin: 3px;
+    display: inline-block;
+}
+
+.apply {
+    background: #5a4bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+}
+</style>
+
+</head>
+
+<body>
+    <h1 style="color:#5a4bff;">HireBridge</h1>
+
+<div class="container">
+
+<h2>Find Jobs</h2>
+
+<input type="text" id="search" class="search" placeholder="Search..." onkeyup="searchJobs()">
+
+<div>
+<button class="btn active" onclick="filterJobs('all')">All</button>
+<button class="btn" onclick="filterJobs('Full-time')">Full-time</button>
+<button class="btn" onclick="filterJobs('Contract')">Contract</button>
+<button class="btn" onclick="filterJobs('Remote')">Remote</button>
+</div>
+
+<div class="grid" id="jobs">
+
+{% for job in jobs %}
+<div class="card" data-type="{{job.get('type','Full-time')}}">
+
+<h3>{{job['title']}}</h3>
+<p>{{job['company']}}</p>
+<p>{{job['location']}}</p>
+<p>{{job.get('type','Full-time')}}</p>
+<p>{{job.get('salary','Not disclosed')}}</p>
+
+<div>
+{% if job.get('skills') %}
+    {% for skill in job['skills'].split(',') %}
+        <span class="tag">{{skill}}</span>
+    {% endfor %}
+{% endif %}
+</div>
+
+<!-- ✅ FIXED APPLY BUTTON -->
+<a href="/apply/{{ job['_id'] }}">
+    <button class="apply">Apply</button>
+</a>
+
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+
+<script>
+function searchJobs(){
+let input=document.getElementById("search").value.toLowerCase();
+let cards=document.getElementsByClassName("card");
+
+for(let i=0;i<cards.length;i++){
+let text=cards[i].innerText.toLowerCase();
+cards[i].style.display=text.includes(input)?"block":"none";
+}
+}
+
+function filterJobs(type){
+let cards=document.getElementsByClassName("card");
+
+for(let i=0;i<cards.length;i++){
+let jobType=cards[i].getAttribute("data-type");
+
+if(type==="all"||jobType===type){
+cards[i].style.display="block";
+}else{
+cards[i].style.display="none";
+}
+}
+}
+</script>
+
+</body>
+</html>

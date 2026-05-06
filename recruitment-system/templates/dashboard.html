@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<div class="container">
+
+<h2>Dashboard</h2>
+
+<a href="/jobs">View Jobs</a><br><br>
+<a href="/my_applications">My Applications</a><br><br>
+
+{% if role == 'admin' %}
+<a href="/applications">Manage Applications</a>
+{% endif %}
+
+</div>

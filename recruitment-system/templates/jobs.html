@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+
+<!-- ✅ SUCCESS MESSAGE -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for c,m in messages %}
+<div class="alert">{{m}}</div>
+{% endfor %}
+{% endwith %}
+
+<h2>Available Jobs</h2>
+
+<!-- 🔍 SEARCH BAR -->
+<form method="get" style="margin-bottom:20px;">
+    <input type="text" name="search" placeholder="Search jobs..." 
+           style="width:70%; padding:10px;">
+    <button class="apply-btn">Search</button>
+</form>
+
+<!-- 📌 JOB LIST -->
+{% for job in jobs %}
+<div class="card">
+    <h3>{{job[1]}}</h3>
+    <p>{{job[2]}}</p>
+
+    <!-- APPLY BUTTON -->
+    <a href="/apply/{{job[0]}}">
+        <button class="apply-btn">Apply</button>
+    </a>
+
+    <!-- SAVE BUTTON -->
+    <a href="/save/{{job[0]}}">
+        <button class="save-btn">Save</button>
+    </a>
+</div>
+{% endfor %}
+
+<!-- NAVIGATION -->
+<div style="margin-top:20px;">
+    <a href="/my_applications">My Applications</a> |
+    <a href="/saved_jobs">Saved Jobs</a> |
+    <a href="/admin">Admin Panel</a>
+</div>
+
+</div>
